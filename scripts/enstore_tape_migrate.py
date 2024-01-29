@@ -148,6 +148,7 @@ def create_eos_files(cta_prefix, enstore_files, file_ids):
     with open(EOS_INSERT_LIST, 'w') as jsonfile:
         for enstore_file in enstore_files:
             file_name = enstore_file.pnfs_path
+            file_size = int(enstore_file.size)
             enstore_id = enstore_file.bfid
             _dummy, file_timestamp, _dummy = decode_bfid(enstore_id)
             if file_timestamp < get_switch_epoch():
@@ -158,8 +159,6 @@ def create_eos_files(cta_prefix, enstore_files, file_ids):
             for enstore_prefix, replacement in ENSTORE_ID_MAP.items():
                 if enstore_id.startswith(enstore_prefix):
                     enstore_id = enstore_id.replace(enstore_prefix, replacement)
-            breakpoint()
-            file_size = int(enstore_file.size)
 
             # Get the EOS container ID and set all paths correctly
             destination_file = os.path.normpath(cta_prefix + '/' + file_name)
@@ -243,6 +242,7 @@ def insert_cta_files(engine, enstore_files, storage_class=None, vid=None, cta_in
     with engine.connect() as connection, Session(engine) as session:
         for enstore_file in enstore_files:
             file_name = enstore_file.pnfs_path
+            print(f'Size {enstore_file.size} on {file_name}')
             file_size = int(enstore_file.size)
             enstore_fseq = int(enstore_file.location_cookie.split('_')[2])  # pull off last field and make integer
             uid = enstore_file.uid
@@ -460,7 +460,9 @@ def enstore_files_from_csv(vid=None):
             for key in row:
                 setattr(enstore_file, key, row[key])
             print(enstore_file)
-            enstore_files.append(enstore_file)
+            if enstore_file.pnfs_path:
+                enstore_files.append(enstore_file)
+
     return enstore_files
 
 
