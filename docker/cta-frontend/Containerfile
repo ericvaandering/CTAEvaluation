@@ -1,0 +1,21 @@
+FROM almalinux/9-base
+ADD cta-public-5-alma9.repo  /etc/yum.repos.d/
+
+RUN dnf upgrade -y \
+    && dnf clean all \
+    && rm -rf /var/cache/dnf
+
+RUN dnf -y install 'dnf-command(config-manager)'\
+    && dnf clean all \
+    && rm -rf /var/cache/dnf
+RUN dnf config-manager --set-enabled crb
+
+RUN dnf install -y epel-release python python3-devel pip libpq-devel gcc unzip \
+# Convenience stuff. Remove in production?
+                   git which nano wget jq sudo \
+    && dnf clean all \
+    && rm -rf /var/cache/dnf
+
+ADD entrypoint.sh /
+
+ENTRYPOINT ["/entrypoint.sh"]
