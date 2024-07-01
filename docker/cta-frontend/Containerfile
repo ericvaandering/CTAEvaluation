@@ -12,7 +12,7 @@ RUN dnf config-manager --set-enabled crb
 
 RUN dnf install -y epel-release python python3-devel pip libpq-devel gcc unzip \
 # Convenience stuff. Remove in production?
-                   git which nano wget jq sudo \
+                   git which nano wget jq sudo procps \
     && dnf clean all \
     && rm -rf /var/cache/dnf
 
