@@ -19,7 +19,7 @@ RUN dnf install -y epel-release python python3-devel pip libpq-devel gcc unzip \
 ADD cta-public-5-alma9.repo  /etc/yum.repos.d/
 ADD oracle.repo  /etc/yum.repos.d/
 
-RUN yum -y install cta-catalogueutils oracle-instantclient-basic \
+RUN yum -y install cta-catalogueutils oracle-instantclient19.19-basic \
     && yum clean all \
     && rm -rf /var/cache/yum
 
