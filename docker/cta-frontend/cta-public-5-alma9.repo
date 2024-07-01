@@ -26,14 +26,14 @@ enabled=1
 
 [cta-eos-diopside]
 name=EOS diopside releases from EOS project
-baseurl=https://storage-ci.web.cern.ch/storage-ci/eos/diopside/tag/testing/el-$releasever/$basearch/
+baseurl=https://storage-ci.web.cern.ch/eos/diopside/tag/testing/el-$releasever/$basearch/
 enabled=1
 gpgcheck=0
 priority=4
 
 [cta-eos-diopside-depend]
 name=dependencies for EOS diopside releases from EOS project
-baseurl=http://storage-ci.web.cern.ch/storage-ci/eos/diopside-depend/el-$releasever/$basearch/
+baseurl=http://storage-ci.web.cern.ch/eos/diopside-depend/el-$releasever/$basearch/
 enabled=1
 gpgcheck=0
 priority=4
