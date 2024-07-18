@@ -12,14 +12,14 @@ block-beta
 
   space:3
 
-  fluent["Fluentd/OKD"]
+  okd["OKD<br><br>fluentd"]
 
   space:3
 
   Landscape
 
   space:4
-  archive["Log Archive"]
+  archive
   space:3
   OpenSearch
 
@@ -31,15 +31,16 @@ block-beta
   tapeServerX  
   end
   space:3
-  checkmk["Alerting/Checkmk"]
+  checkmk["TI log node<br><br>rsyslog<br>checkmk"]
   space:3
   ServiceNow
 
-  FE-- "for monitoring" -->fluent 
-  FE-- "for archival" -->archive 
-  FE--  "for alerting" -->checkmk 
-  TS-- "for monitoring" -->fluent 
-  TS-- "for archival" -->archive 
-  TS-- "for alerting" -->checkmk 
-
+  FE  -->okd 
+  FE  -->archive 
+  FE  -->checkmk 
+  TS -->okd 
+  TS -->archive 
+  TS  -->checkmk 
+  okd-- "Performance data " --> Landscape
+  okd-- "Log rentention" --> OpenSearch
 ```
