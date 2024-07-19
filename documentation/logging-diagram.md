@@ -39,12 +39,12 @@ block-beta
   space:3
   global_alerts["ServiceNow<br>Slack"]
 
-  FE  -->okd 
+  FE-- "rsyslog"   -->okd 
 
-  FE  -->checkmk 
+  FE-- "rsyslog"   -->checkmk 
   TS -->okd 
 
-  TS  -->checkmk 
+  TS-- "rsyslog"   -->checkmk 
   okd-- "Performance data " --> Landscape
 
   
