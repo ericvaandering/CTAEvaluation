@@ -1,0 +1,11 @@
+global:
+  compatibility:
+    openshift:
+      adaptSecurityContext: force
+
+
+forwarder:
+  rbac:
+    create: false
+
+

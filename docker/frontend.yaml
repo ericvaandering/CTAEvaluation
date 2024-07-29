@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2024-07-03T20:26:09Z"
+  name: cta-frontend
+  namespace: cta-preprod
+  resourceVersion: "401295838"
+  uid: a3516156-da15-4822-a767-339029b6aadf
+spec:
+  clusterIP: 172.30.4.82
+  clusterIPs:
+  - 172.30.4.82
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 10955
+    protocol: TCP
+    targetPort: 10955
+  selector:
+    app: cta-frontend
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

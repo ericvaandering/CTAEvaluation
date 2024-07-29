@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2024-07-22T19:30:50Z"
+  name: cta-fluentd
+  namespace: cta-preprod
+  resourceVersion: "432183103"
+  uid: 232a0471-62ff-42ef-a30f-ba0a08cdfe1c
+spec:
+  clusterIP: 172.30.184.112
+  clusterIPs:
+  - 172.30.184.112
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 9882
+    protocol: TCP
+    targetPort: 9882
+  selector:
+    app: cta-logs
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
