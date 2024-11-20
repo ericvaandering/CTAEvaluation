@@ -1,6 +1,7 @@
 FROM almalinux/9-base
-ADD cta-public-5-alma9.repo  /etc/yum.repos.d/
-#ADD cta-public-5-test-alma9.repo  /etc/yum.repos.d/
+ARG CTA_RELEASE=5.10.11.0-1.el9.el9
+#ADD cta-public-5-alma9.repo  /etc/yum.repos.d/
+ADD cta-public-5-test-alma9.repo  /etc/yum.repos.d/
 ADD ceph.repo  /etc/yum.repos.d/
 
 RUN dnf upgrade -y \
@@ -16,7 +17,7 @@ RUN dnf -y install https://download.oracle.com/otn_software/linux/instantclient/
 
 RUN dnf install -y epel-release && \
     dnf install -y libpq-devel gcc \
-                   xrootd-server cta-frontend cta-frontend-grpc \
+                   xrootd-server cta-frontend-$CTA_RELEASE cta-frontend-grpc-$CTA_RELEASE \
     && dnf clean all \
     && rm -rf /var/cache/dnf
 
