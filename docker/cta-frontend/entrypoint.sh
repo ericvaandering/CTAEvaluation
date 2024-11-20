@@ -6,3 +6,5 @@ chmod 600 /etc/cta-nobody/eos.sss.keytab
 
 # Start the server
 /usr/bin/xrootd -l /var/log/cta/cta-frontend-xrootd.log -c /etc/cta/cta-frontend-xrootd.conf -k fifo -n cta
+
+sleep infinity
