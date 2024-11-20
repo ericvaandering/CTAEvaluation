@@ -21,6 +21,8 @@ RUN dnf install -y epel-release procps-ng && \
     && dnf clean all \
     && rm -rf /var/cache/dnf
 
+RUN dnf install -y cta-objectstore-tools-$CTA_RELEASE
+
 RUN chmod 777 /var/log/cta
 RUN mkdir /etc/cta-nobody/
 RUN chmod 777 /etc/cta-nobody/
