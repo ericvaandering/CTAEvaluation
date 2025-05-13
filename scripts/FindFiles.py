@@ -3,9 +3,9 @@
 # Find files which are very close to MB boundaries for testing
 import subprocess
 import json
-THRESHOLD = 300
+THRESHOLD = 512
 
-vids = [ "VR1863", "VR1871", "VR5775", "VR7029" ]
+vids = [ "VR1863", "VR1871", "VR5775", "VR7029", "VR3028"]
 
 for vid in vids:
     tfLS_output = subprocess.check_output([f"cta-admin --json tf ls --vid {vid}"], shell=True)
@@ -15,7 +15,7 @@ for vid in vids:
         disk_id = tf['df']['diskId']
         f_seq = tf['tf']['fSeq']
 
-        delta = abs(size % (1024*1024))
-        if delta < THRESHOLD:
+        mb = round(size / 1024 / 1024)
+        delta = size - mb * 1024 * 1024
+        if abs(delta) < THRESHOLD:
             print(f"{vid} {f_seq} {delta} {disk_id}")
-            
